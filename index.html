@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Raksha Bandhan!</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Teko:wght@700&family=Hind:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Firecracker Effect Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #E65100;
+            --secondary-color: #FFC107;
+            --text-color: #333;
+            --bg-gradient: linear-gradient(135deg, #FF9933 0%, #FF5722 100%);
+        }
+
+        body {
+            font-family: 'Hind', sans-serif;
+            background: var(--bg-gradient);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            padding: 15px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.97);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 3px solid var(--secondary-color);
+            max-width: 500px;
+            width: 100%;
+            animation: fadeInContainer 1s ease-out;
+        }
+
+        @keyframes fadeInContainer {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .rakhi-gif {
+            max-width: 100%;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid var(--secondary-color);
+        }
+
+        #greetingMessage h1 {
+            font-family: 'Teko', sans-serif;
+            font-size: clamp(2.5rem, 10vw, 3.5rem);
+            color: var(--primary-color);
+            margin: 10px 0;
+            letter-spacing: 2px;
+            animation: textGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        #greetingMessage h2 {
+            font-size: clamp(1.5rem, 6vw, 2rem);
+            color: #00897B;
+            margin: 0 0 20px 0;
+            font-weight: 700;
+            animation: fadeInScale 2s ease-out;
+        }
+
+        .quote-box {
+            font-size: 1.1em;
+            color: #555;
+            padding: 15px;
+            margin: 20px 0;
+            border-top: 2px dashed var(--secondary-color);
+            border-bottom: 2px dashed var(--secondary-color);
+            background-color: #FFF9C4;
+            border-radius: 8px;
+            font-style: italic;
+        }
+
+        .form-container p {
+            font-size: 1.2em;
+            color: var(--text-color);
+            font-weight: bold;
+            margin-top: 25px;
+        }
+
+        #nameInput {
+            width: 90%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #ccc;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+
+        #nameInput:focus { border-color: var(--primary-color); outline: none; }
+
+        .main-share-button {
+            display: block; width: 95%; margin: 20px auto 0; padding: 15px;
+            background: linear-gradient(45deg, #4CAF50, #8BC34A); color: white; border: none;
+            border-radius: 8px; font-size: 1.3em; font-weight: bold; cursor: pointer; transition: all 0.3s;
+        }
+
+        .main-share-button:hover { transform: scale(1.05); }
+
+        .fallback-options {
+            margin-top: 20px; display: flex; flex-direction: column; gap: 10px; align-items: center;
+        }
+        .fallback-options .fallback-btn {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            width: 95%; padding: 12px; color: white; border: none; border-radius: 8px;
+            font-size: 1.1em; font-weight: bold; text-decoration: none; cursor: pointer; transition: opacity 0.3s;
+        }
+        .fallback-btn:hover { opacity: 0.9; }
+        .whatsapp { background-color: #25D366; }
+        .facebook { background-color: #1877F2; }
+        .copy-link { background-color: #6c757d; }
+
+        .footer-credit {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        .hidden { display: none; }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 5px #fff, 0 0 10px var(--secondary-color); }
+            to { text-shadow: 0 0 10px #fff, 0 0 20px var(--secondary-color); }
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="greetingMessage" class="hidden">
+            <h1>Happy Raksha Bandhan!</h1>
+            <h2 id="fromName"></h2>
+        </div>
+
+        <img src="Rakhi.gif" alt="Rakhi Animation" class="rakhi-gif">
+
+        <div class="quote-box">
+            "बहन का प्यार किसी दुआ से कम नहीं होता, वो चाहे दूर भी हो तो गम नहीं होता। अक्सर रिश्ते दूरियों से फीके पड़ जाते हैं, पर भाई-बहन का प्यार कभी कम नहीं होता।"
+        </div>
+
+        <div class="form-container">
+            <p>अपना नाम लिखकर शुभकामनाएं शेयर करें:</p>
+            <input type="text" id="nameInput" placeholder="आपका नाम यहाँ लिखें...">
+            <button class="main-share-button" onclick="generateAndShare()">✨ शुभकामनाएं शेयर करें ✨</button>
+            
+            <div id="fallback-container" class="hidden">
+                <p style="margin-top:20px; font-weight:bold;">यहाँ से शेयर करें:</p>
+                <div class="fallback-options">
+                    <a id="whatsapp-share" class="fallback-btn whatsapp" href="#" target="_blank">Share on WhatsApp</a>
+                    <a id="facebook-share" class="fallback-btn facebook" href="#" target="_blank">Share on Facebook</a>
+                    <button id="copy-link-btn" class="fallback-btn copy-link">Copy Link</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER WITH ADS -->
+        <footer class="footer-credit">
+            <p>इस खास मौके के लिए ❤️ से बनाया गया। © <span id="year"></span></p>
+            
+            <div style="margin-top: 15px; display: flex; justify-content: center; align-items: center;">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key': 'adcafd996380d1dcd3e8ef856ef6b26a',
+                        'format': 'iframe',
+                        'height': 60,
+                        'width': 468,
+                        'params': {}
+                    };
+                </script>
+                <script type="text/javascript" src="//www.highperformanceformat.com/adcafd996380d1dcd3e8ef856ef6b26a/invoke.js"></script>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        window.onload = function() {
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const fromName = urlParams.get('from');
+            if (fromName) {
+                const greetingMessageDiv = document.getElementById('greetingMessage');
+                const fromNameH2 = document.getElementById('fromName');
+                fromNameH2.innerText = `तुम्हारी तरफ से: ${decodeURIComponent(fromName)}`;
+                greetingMessageDiv.classList.remove('hidden');
+                launchFireworks();
+            }
+        };
+
+        async function generateAndShare() {
+            const nameInput = document.getElementById('nameInput');
+            const name = nameInput.value.trim();
+            if (name === "") {
+                alert("शेयर करने से पहले कृपया अपना नाम डालें!");
+                return;
+            }
+
+            const encodedName = encodeURIComponent(name);
+            const baseUrl = window.location.origin + window.location.pathname;
+            const newLink = `${baseUrl}?from=${encodedName}`;
+            const shareMessage = `${name} ने आपके लिए राखी की ढेर सारी शुभकामनाएं भेजी हैं। ✨\n\nदेखने के लिए नीचे दिए लिंक पर क्लिक करें 👇`;
+
+            const shareData = { title: 'रक्षा बंधन की शुभकामनाएं!', text: shareMessage, url: newLink };
+
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    showFallbackOptions(shareMessage, newLink);
+                }
+            } else {
+                showFallbackOptions(shareMessage, newLink);
+            }
+        }
+
+        function showFallbackOptions(message, link) {
+            const fallbackContainer = document.getElementById('fallback-container');
+            const whatsappLink = document.getElementById('whatsapp-share');
+            const facebookLink = document.getElementById('facebook-share');
+            const copyBtn = document.getElementById('copy-link-btn');
+            const fullMessage = `${message}\n${link}`;
+            whatsappLink.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(fullMessage)}`;
+            facebookLink.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`;
+            copyBtn.onclick = function() {
+                navigator.clipboard.writeText(fullMessage).then(() => {
+                    alert('लिंक कॉपी हो गया है! अब आप इसे कहीं भी पेस्ट कर सकते हैं।');
+                }, () => {
+                    alert('लिंक कॉपी नहीं हो सका।');
+                });
+            };
+            fallbackContainer.classList.remove('hidden');
+        }
+
+        function launchFireworks() {
+            var duration = 8 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = {
+                startVelocity: 30, spread: 360, ticks: 60, zIndex: 0,
+                shapes: ['star'], colors: ['#FFC700', '#FF0000', '#FFFFFF', '#FF9933']
+            };
+            function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+                var particleCount = 150 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 200);
+        }
+    </script>
+</script>
+
+<audio id="bgMusic" autoplay loop>
+  <source src="https://dl.sndup.net/pvwt9/Rakhi.mp3" type="audio/mp3">
+  आपका ब्राउज़र म्यूजिक प्ले नहीं कर सकता।
+</audio>
+
+<script>
+    document.body.addEventListener('click', function () {
+        var music = document.getElementById('bgMusic');
+        if (music.paused) {
+            music.play().catch((e) => {
+                console.log("Autoplay failed", e);
+            });
+        }
+    }, { once: true });
+</script>
+
+</body>
+</html>
